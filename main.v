@@ -45,6 +45,11 @@ pub fn (app &App) addbook(mut ctx Context) veb.Result {
 	mut err := []string{}
 	if title == '' {
 		err << 'title is required'
+	} else {
+		check := app.db.exec_map('select * from books where title = "${title}"') or { panic(err) }
+		if check.len > 0 {
+			return ctx.text('"${title}" already exists')
+		}
 	}
 	if author == '' {
 		err << 'author is missing'
@@ -55,19 +60,17 @@ pub fn (app &App) addbook(mut ctx Context) veb.Result {
 	if price == '' || price.f64() == 0 {
 		err << 'price not entered or is zero'
 	}
-	if err.len > 0 {
-		return $veb.html('addbook')
-	} else {
-		check := app.db.exec_map('select * from books where title = "${title}"') or { panic(err) }
-		if check.len > 0 {
-			return ctx.text('"${title}" already exists')
-		}
+	if err.len == 0 {
 		row := app.db.exec("insert into books (title,author,yearpub,price) values ('${title}','${author}','${yearpub}','${price}')") or {
 			panic(err)
 		}
 		println('row = ${row}')
 	}
-	return $veb.html('addbook')
+	if err.len > 0 {
+		return ctx.text('<ul style="color:maroon;font-size:12px"><li>' + err.join('</li><li>') +
+			'</li></ul>')
+	}
+	return ctx.text("<button hx-get='/newbook' hx-target='#content'>New book</button><button hx-get='/showbooks' hx-target='#content'>View List</button>")
 }
 
 @['/showbooks'; get]

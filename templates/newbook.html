@@ -1,7 +1,6 @@
 <div>
     <h3>New Book</h3>
     <div id="msg"></div>
-
     <div>
         <form hx-post="/addbook" hx-target="#msg">
             <div class="form-field">
@@ -41,6 +40,7 @@
             </div>
             <div class="form-field">
                 <button>Add</button>
+                <button hx-get="/showbooks" hx-target="#content">Cancel</button>
             </div>
         </form>
     </div>
