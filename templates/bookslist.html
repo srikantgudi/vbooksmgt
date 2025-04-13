@@ -1,0 +1,25 @@
+<div>
+    <h2>Books list</h2>
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Year published</td>
+                    <td align="right">Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for b in res
+                <tr>
+                    <td>${b['title']}</td>
+                    <td>${b['author']}</td>
+                    <td>${b['yearpub']}</td>
+                    <td>${b['price']}</td>
+                </tr>
+                @end
+            </tbody>
+        </table>
+    </div>
+</div>

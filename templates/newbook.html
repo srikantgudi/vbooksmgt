@@ -1,0 +1,47 @@
+<div>
+    <h3>New Book</h3>
+    <div id="msg"></div>
+
+    <div>
+        <form hx-post="/addbook" hx-target="#msg">
+            <div class="form-field">
+                <label>Title: </label>
+                <input
+                    id="booktitle"
+                    name="booktitle"
+                    placeholder="book title"
+                />
+            </div>
+            <div class="form-field">
+                <label>Author:</label>
+                <input
+                    id="bookauthor"
+                    name="bookauthor"
+                    placeholder="author name"
+                />
+            </div>
+            <div class="form-field">
+                <label>Year published: </label>
+                <input
+                    size="4"
+                    maxlength="4"
+                    id="bookyearpub"
+                    name="bookyearpub"
+                    placeholder="year published"
+                />
+            </div>
+            <div class="form-field">
+                <label>Price: </label>
+                <input
+                    style="text-align: right"
+                    id="bookprice"
+                    name="bookprice"
+                    placeholder="price"
+                />
+            </div>
+            <div class="form-field">
+                <button>Add</button>
+            </div>
+        </form>
+    </div>
+</div>
